@@ -2,7 +2,7 @@ import type { FC } from "react";
 import React, { useState } from "react";
 // import Header from "../Header/Header";
 import "./Home.less";
-import "antd/dist/reset.css";
+// import "antd/dist/reset.css";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -11,7 +11,6 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, theme } from "antd";
-
 const { Header, Sider, Content } = Layout;
 const Home: FC = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -21,25 +20,18 @@ const Home: FC = () => {
 
   return (
     <Layout style={{ height: "100%" }} className="home">
-      <Sider
-        trigger={null}
-        // collapsible
-        // collapsed={collapsed}
-        className="layoutSider"
-        width={180}
-        collapsedWidth={50}
-        breakpoint="xxl"
-      >
+      <Sider collapsedWidth={0} breakpoint="xxl">
         <div className="logo" />
         <Menu
           theme="dark"
           mode="inline"
+          selectable
           defaultSelectedKeys={["1"]}
           items={[
             {
               key: "1",
               icon: <UserOutlined />,
-              label: "nav 1",
+              label: "主页",
             },
             {
               key: "2",
