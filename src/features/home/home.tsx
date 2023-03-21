@@ -1,74 +1,29 @@
-import type { FC } from "react";
-import React, { useState } from "react";
-// import Header from "../Header/Header";
-import "./Home.less";
-// import "antd/dist/reset.css";
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
-import { Layout, Menu, theme } from "antd";
-const { Header, Sider, Content } = Layout;
-const Home: FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
-
-  return (
-    <Layout style={{ height: "100%" }} className="home">
-      <Sider collapsedWidth={0} breakpoint="xxl">
-        <div className="logo" />
-        <Menu
-          theme="dark"
-          mode="inline"
-          selectable
-          defaultSelectedKeys={["1"]}
-          items={[
-            {
-              key: "1",
-              icon: <UserOutlined />,
-              label: "主页",
-            },
-            {
-              key: "2",
-              icon: <VideoCameraOutlined />,
-              label: "nav 2",
-            },
-            {
-              key: "3",
-              icon: <UploadOutlined />,
-              label: "nav 3",
-            },
-          ]}
-        />
-      </Sider>
-      <Layout className="site-layout">
-        <Header style={{ padding: 5, background: colorBgContainer }}>
-          {React.createElement(
-            collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
-            {
-              className: "trigger",
-              onClick: () => setCollapsed(!collapsed),
-            }
-          )}
-        </Header>
-        <Content
-          style={{
-            margin: "24px 16px",
-            padding: 24,
-            minHeight: 280,
-            background: colorBgContainer,
-          }}
-        >
-          Content
-        </Content>
-      </Layout>
-    </Layout>
+import React from 'react'
+import { useMatches } from "react-router-dom";
+function Breadcrumbs() {
+  let matches = useMatches();
+  // type  r3r3= typeof matches
+  let crumbs = matches.map((match) =>
+    (match.handle as { crumb: (data: any) => number })?.crumb(match.data)
   );
-};
+    // .filter((match) => Boolean(match.handle?.crumb))
+    console.log("⚠检测 ~ crumbs:", crumbs)
+    
+    // first get rid of any matches that don't have handle and crumb
+  //   // now map them into an array of elements, passing the loader
+  //   // data to each one
 
-export default Home;
+  // return (
+  //   <ol>
+  //     {crumbs.map((crumb, index) => (
+  //       <li key={index}>{crumb}</li>
+  //     ))}
+  //   </ol>
+  // );
+}
+export default function home() {
+  Breadcrumbs()
+  return (
+    <div>home</div>
+  )
+}
